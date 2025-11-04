@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koenig Ventures Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f8f9fb;
+      color: #222;
+    }
+    header, footer {
+      background-color: #001f3f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    main {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+    a { color: #001f3f; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer p { margin: 5px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Koenig Ventures Blog</h1>
+  </header>
+  <main>
+    <h2>Recent Posts</h2>
+    <ul>
+      <li>
+        <strong>Nov 5, 2025 — Market Volatility and Asymmetric Risk</strong><br>
+        <a href="2025-11-05-market-volatility.html">Read More</a>
+      </li>
+    </ul>
+    <p><a href="../index.html">← Back to Home</a></p>
+  </main>
+  <footer>
+    <p>© 2025 Koenig Ventures LLC | v9 | info@koenigventures.net</p>
+  </footer>
+</body>
+</html>
