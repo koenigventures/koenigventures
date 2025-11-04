@@ -16,6 +16,13 @@
       color: white;
       text-align: center;
       padding: 20px;
+      position: relative;
+    }
+    header img {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 60px;
     }
     main {
       padding: 40px;
@@ -29,39 +36,12 @@
       color: #001f3f;
       margin-bottom: 10px;
     }
-    .thoughts-box {
+    .thoughts-box, .blog-box {
       border: 1px solid #ccc;
       background: white;
       padding: 20px;
       border-radius: 10px;
       min-height: 250px;
-    }
-    form textarea {
-      width: 100%;
-      min-height: 200px;
-      border-radius: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      font-family: Arial, sans-serif;
-      font-size: 1em;
-      resize: vertical;
-    }
-    form button {
-      margin-top: 10px;
-      background-color: #001f3f;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-    }
-    form button:hover {
-      background-color: #004080;
-    }
-    footer p {
-      margin: 5px;
-      font-size: 0.9em;
     }
     a {
       color: #001f3f;
@@ -70,10 +50,15 @@
     a:hover {
       text-decoration: underline;
     }
+    footer p {
+      margin: 5px;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Koenig Ventures Logo">
     <h1>Koenig Ventures LLC</h1>
     <p>Strategic Investments | Global Markets | Innovation</p>
   </header>
@@ -92,19 +77,28 @@
     <section id="koenigs-thoughts">
       <h2>Koenig’s Thoughts</h2>
       <p>A space for personal reflections on markets, risk, and innovation.</p>
-      <form name="Koenig's Thoughts" method="POST" data-netlify="true">
-        <div class="thoughts-box">
-          <textarea name="message" placeholder="Write up to 500 words here..."></textarea>
-        </div>
-        <button type="submit">Update Thoughts</button>
-      </form>
+      <div class="thoughts-box">
+        <!-- You can write up to 500 words here -->
+      </div>
+    </section>
+
+    <section id="blog">
+      <h2>Koenig Ventures Blog</h2>
+      <p><em>Market insights, research notes, and perspectives from Steven G. Koenig.</em></p>
+      <div class="blog-box">
+        <h3>Nov 5, 2025 — Market Volatility and Asymmetric Risk</h3>
+        <p>As volatility compresses, traders lose sight of optionality...</p>
+        <a href="blog/2025-11-05-market-volatility.html">Read More</a>
+      </div>
+      <p><a href="blog/index.html">View all posts →</a></p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Koenig Ventures LLC | v8 | info@koenigventures.net</p>
+    <p>© 2025 Koenig Ventures LLC | v9 | info@koenigventures.net</p>
   </footer>
 </body>
 </html>
+
 
 
