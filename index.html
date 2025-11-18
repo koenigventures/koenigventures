@@ -66,17 +66,22 @@
     </div>
   </section>
 
-  <section id='thoughts'>
-    <h3>Thoughts</h3>
-    <div class='thoughts-box'>
-      <p>Share a thought or question with Koenig Ventures — we value your ideas and dialogue.</p>
-      <form id='thoughtForm' onsubmit="event.preventDefault(); alert('Thank you for sharing your thoughts! This demo does not send data yet.');">
-        <input type='text' id='name' placeholder='Your name (optional)' />
-        <textarea id='message' rows='4' placeholder='Write your thought or question here...'></textarea>
-        <button type='submit'>Submit</button>
-      </form>
-    </div>
-  </section>
+ <section id="thoughts">
+  <h3>Thoughts</h3>
+  <div class="thoughts-box">
+    <p>Share a thought or question with Koenig Ventures — we value your ideas and dialogue.</p>
+
+    <form name="thoughts" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="thoughts">
+
+      <input type="text" name="name" placeholder="Your name (optional)" />
+      <textarea name="message" rows="4" placeholder="Write your thought or question here..."></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+  </div>
+</section>
 
   <section id='about'>
     <h3>About</h3>
