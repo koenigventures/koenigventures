@@ -27,6 +27,72 @@
     header { background: linear-gradient(to right, #0d47a1, #1976d2); color: white; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
     ...
     footer a { color: #1976d2; text-decoration: none; margin: 0 0.5rem; }
+        /* --- Koenig Ventures Logo Section --- */
+    .kv-logos {
+      padding: 48px 0;
+    }
+
+    .kv-logos__inner {
+      width: min(1100px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .kv-logos__title {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.2px;
+    }
+
+    .kv-logos__subtitle {
+      margin: 10px 0 24px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .kv-logos__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .kv-logos__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .kv-logos__grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    .kv-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.60);
+      text-decoration: none;
+      transition: transform 150ms ease, border-color 150ms ease;
+      min-height: 84px;
+    }
+
+    .kv-logo:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,0,0,0.18);
+    }
+
+    .kv-logo img {
+      max-width: 140px;
+      width: 100%;
+      height: 42px;
+      object-fit: contain;
+      display: block;
+    }
+   
 </style>
 
   </style>
