@@ -100,45 +100,344 @@
   <h2>Koenig Ventures Blog</h2>
   <p><em>Market insights, research notes, and perspectives from Steven G. Koenig.</em></p>
 
-  <div class="blog-box">
-    <h3>Private Market Valuation and the Way Forward</h3>
-<p><em>Published by Steven Koenig</em></p>
+  <!-- =========================
+ Koenig Ventures Article Block
+ Title: DVaR Wrapping in Supply Chains
+ Author: Steven G. Koenig
+ ========================= -->
 
-<p>
-Private markets have expanded into a multi-trillion-dollar global asset class, yet the industry still struggles with one of its most fundamental responsibilities: determining consistent and defensible fair valuation. Frameworks such as ASC 820 and IFRS 13 were designed to promote transparency, comparability, and discipline. In practice, however, the application of these standards across private credit, private equity, and venture capital has become uneven, and in some cases, highly subjective.
-</p>
+<article class="kv-article" id="dvar-wrapping-supply-chains">
+  <style>
+    /* Minimal, self-contained styling. Safe to remove if your site has global typography. */
+    .kv-article { max-width: 920px; margin: 0 auto; padding: 12px 16px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #0f172a; }
+    .kv-article h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 6px; }
+    .kv-article .kv-meta { font-size: 0.95rem; color: #475569; margin-bottom: 18px; }
+    .kv-article h2 { font-size: 1.35rem; margin: 28px 0 10px; }
+    .kv-article h3 { font-size: 1.1rem; margin: 18px 0 8px; }
+    .kv-article p { line-height: 1.55; margin: 10px 0; }
+    .kv-article ul { margin: 10px 0 10px 20px; line-height: 1.55; }
+    .kv-article li { margin: 6px 0; }
+    .kv-hr { border: 0; border-top: 1px solid #e2e8f0; margin: 18px 0; }
 
-<p>
-The core challenge lies in methodological discretion. Managers may choose among income, market, or cost approaches—each with different assumptions, sensitivities, and data requirements. While flexibility is necessary to accommodate different sectors and stages, it also opens the door to optimistic bias. Reliance on last-round financing, delayed markdowns, and aggressive comparables have become common. The high-profile valuation resets at Tiger Global and SoftBank’s Vision Fund revealed how quickly “fair value” can converge toward “mark-to-myth” when liquidity tightens and exit markets stall.
-</p>
+    .kv-callout {
+      border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 12px;
+      padding: 14px 14px; margin: 16px 0;
+    }
+    .kv-callout strong { display: inline-block; margin-bottom: 6px; }
+    .kv-quote {
+      border-left: 4px solid #2563eb; padding: 10px 14px; margin: 14px 0;
+      background: #eff6ff; border-radius: 10px;
+    }
 
-<p>
-This issue is most acute for Level 3 assets, where unobservable inputs dominate and management judgment drives the outcome. In too many organizations, valuation is still treated as an administrative or audit requirement rather than a core element of fiduciary duty. Without strong governance, independent oversight, and a consistent philosophy, even well-intentioned teams can unintentionally distort performance measurement, carry calculations, and internal decision-making. Conservative managers may appear to underperform peers who adopt more aggressive marks, creating an uneven competitive landscape that inadvertently penalizes discipline.
-</p>
+    .kv-kpi {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0;
+    }
+    .kv-kpi .kv-kpi__box {
+      border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; background: #ffffff;
+    }
+    .kv-kpi .kv-kpi__label { font-size: 0.85rem; color: #64748b; margin-bottom: 6px; }
+    .kv-kpi .kv-kpi__value { font-size: 1.2rem; font-weight: 700; }
+    .kv-kpi .kv-kpi__note { font-size: 0.85rem; color: #475569; margin-top: 4px; }
 
-<p>
-A more robust valuation practice requires both stronger analytics and better governance. Three specific action plans can materially improve outcomes while aligning firms with institutional best practices.
-</p>
+    .kv-table-wrap { overflow-x: auto; margin: 12px 0; }
+    table.kv-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    table.kv-table th, table.kv-table td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+    table.kv-table th { background: #f1f5f9; font-weight: 700; }
+    table.kv-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .kv-footnote { font-size: 0.9rem; color: #475569; margin-top: 10px; }
 
-<p>
-<strong>First, establish a valuation committee with independent oversight.</strong> Including internal finance leaders and at least one external valuation expert introduces structure, challenge, and accountability into the process. The committee reviews key assumptions, approves methodologies, and documents the rationale for all material marks. This mitigates conflicts of interest, supports audit readiness, and sends a clear signal to investors that valuation integrity is prioritized over short-term optics.
-</p>
+    .kv-bullets-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .kv-bullets-2col .kv-callout { margin: 0; }
+    @media (max-width: 760px) {
+      .kv-kpi { grid-template-columns: 1fr; }
+      .kv-bullets-2col { grid-template-columns: 1fr; }
+    }
 
-<p>
-<strong>Second, implement sensitivity analysis and Monte Carlo simulation.</strong> Rather than anchoring on single “best estimate” values, managers can present a distribution of outcomes based on variations in growth rates, exit multiples, discount rates, and holding periods. This probabilistic perspective aligns with the spirit of ASC 820’s guidance on unobservable inputs and provides a more honest view of uncertainty. It also improves internal dialogue: instead of debating a single point estimate, teams can discuss ranges, probabilities, and downside scenarios.
-</p>
+    .kv-math {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: #0b1220; color: #e2e8f0; border-radius: 12px; padding: 12px; overflow-x: auto;
+      margin: 12px 0;
+    }
+  </style>
 
-<p>
-<strong>Third, mandate robust documentation and quarterly reassessments.</strong> Firms should maintain clear records of inputs, data sources, and decisions for each valuation, and revisit them at least quarterly. This cadence captures changing market conditions, reduces the risk of stale marks, and helps identify emerging risks before they compound. While more frequent reviews may introduce short-term NAV volatility, investors are increasingly signaling that they prefer accurate volatility to artificial stability.
-</p>
+  <header>
+    <h1>DVaR Wrapping in Supply Chains</h1>
+    <div class="kv-meta">
+      <span><strong>Steven G. Koenig</strong></span> &nbsp;•&nbsp;
+      <span>Koenig Ventures LLC</span> &nbsp;•&nbsp;
+      <span>~7 min read</span>
+    </div>
+  </header>
 
-<p>
-Taken together, these measures form a practical roadmap for strengthening fair value practices. A hybrid approach—combining an independent valuation committee with quantitative tools such as sensitivity analysis and Monte Carlo simulation—is often the most effective. It blends governance and analytics, transforming valuation from a static compliance exercise into a disciplined, repeatable process that reflects how risk and uncertainty actually behave in private markets.
-</p>
+  <section class="kv-callout">
+    <strong>Executive Summary</strong>
+    <p>
+      Many supply chains are optimized for efficiency under “normal” volatility—then break under stress.
+      The result is predictable: spot freight, emergency sourcing, missed service levels, and sudden profit
+      erosion that shows up as an ugly surprise in the monthly close.
+    </p>
+    <p>
+      This post proposes a practical upgrade: model uncertainty with <strong>stochastic volatility</strong>
+      (time-varying risk), then <strong>wrap the tail</strong> with a downside risk measure like
+      <strong>DVaR/CVaR (Expected Shortfall)</strong>. The goal is to convert chaotic, unbudgeted tail losses
+      into structured, planned operating options—reducing total cost and increasing resilience.
+    </p>
+  </section>
 
-<p>
-Ultimately, valuation is more than an accounting requirement; it is a statement of integrity. When marks are inflated or inconsistent, they distort fund economics, erode investor confidence, and undermine the credibility of the asset class. When firms embrace transparency, humility, and analytical rigor, valuation becomes a strategic advantage rather than a regulatory burden. As private markets continue to grow in scale and systemic importance, those managers who treat fair value as part of their ethical foundation—not just their reporting framework—will be best positioned to attract capital, navigate volatility, and sustain long-term trust.
-</p>
+  <section>
+    <h2>1) The modern supply chain problem: volatility isn’t “normal” anymore</h2>
+    <p>
+      Supply chains increasingly behave like markets: calm regimes flip into turbulent regimes, correlations
+      tighten under stress, and large shocks arrive discontinuously. Losses are often <em>convex</em>—small
+      delays do little, but large delays trigger cascades (production stops, expediting, penalties, churn).
+    </p>
+    <p>
+      In convex systems, the tail is where the real money is lost (or saved). That makes tail measurement
+      and tail mitigation a first-order management problem—not a footnote.
+    </p>
+
+    <div class="kv-quote">
+      <p><strong>Key intuition:</strong> A lean design can look “optimal” on average while remaining structurally exposed to
+      a small set of high-severity states that dominate long-run outcomes.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>2) Why VaR thinking fails when tails dominate</h2>
+    <p>
+      VaR answers a quantile question: “How bad could it get <em>up to</em> a threshold at 95% or 99% confidence?”
+      That is useful, but incomplete.
+    </p>
+    <p>
+      VaR does <strong>not</strong> answer the severity question: “If we are already in the worst 1%, how catastrophic is
+      the average outcome likely to be?”
+    </p>
+
+    <div class="kv-callout">
+      <strong>VaR vs. DVaR/CVaR in one line</strong>
+      <p>
+        <strong>VaR</strong> is the cliff edge. <strong>DVaR/CVaR</strong> is the average depth of the fall beyond the cliff.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>3) The wrapper: DVaR/CVaR (Expected Shortfall) as a COO/CFO metric</h2>
+    <p>
+      In practice, “DVaR wrapping” is best implemented as <strong>CVaR</strong> (Conditional VaR), also known as
+      <strong>Expected Shortfall</strong>—a measure widely used in finance because it explicitly prices the tail.
+    </p>
+    <p>
+      Conceptually:
+    </p>
+
+    <div class="kv-math" aria-label="objective-function">
+      Minimize:  J = E[C] + λ · CVaR₉₉%(C)
+    </div>
+
+    <p>
+      Where <code>C</code> is your total disruption cost (stockouts, expedite spend, penalties, recovery costs),
+      and <code>λ</code> is a transparent management choice reflecting risk appetite.
+    </p>
+
+    <div class="kv-bullets-2col">
+      <div class="kv-callout">
+        <strong>What the COO hears</strong>
+        <ul>
+          <li>Fewer operational fire drills</li>
+          <li>Higher service levels under stress</li>
+          <li>Better recovery agility</li>
+          <li>Less fragility from single points of failure</li>
+        </ul>
+      </div>
+      <div class="kv-callout">
+        <strong>What the CFO hears</strong>
+        <ul>
+          <li>Lower tail-loss exposure (fewer “bad quarter” events)</li>
+          <li>Reduced earnings volatility</li>
+          <li>Fewer surprise cash drains</li>
+          <li>More budgetable “premium” vs. emergency spend</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="kv-hr" />
+
+  <section>
+    <h2>4) Example: one critical component, one ugly tail</h2>
+    <p>
+      Assume a product line depends on an imported component with limited substitution options.
+      The business is healthy—until a disruption pushes lead times into a high-volatility regime.
+    </p>
+
+    <div class="kv-kpi" role="group" aria-label="example-kpis">
+      <div class="kv-kpi__box">
+        <div class="kv-kpi__label">Revenue supported</div>
+        <div class="kv-kpi__value">$300M</div>
+        <div class="kv-kpi__note">annual</div>
+      </div>
+      <div class="kv-kpi__box">
+        <div class="kv-kpi__label">Gross margin rate</div>
+        <div class="kv-kpi__value">40%</div>
+        <div class="kv-kpi__note">implies $120M gross margin</div>
+      </div>
+      <div class="kv-kpi__box">
+        <div class="kv-kpi__label">Normal lead time</div>
+        <div class="kv-kpi__value">35 days</div>
+        <div class="kv-kpi__note">subject to regime shifts</div>
+      </div>
+    </div>
+
+    <p>
+      We simulate 10,000 scenarios with demand variability, lead-time stochastic volatility (calm vs. turbulent),
+      and jump events (port closure, supplier outage, freight capacity shock). For each scenario, total disruption
+      cost is computed as:
+    </p>
+
+    <div class="kv-math" aria-label="cost-definition">
+      C = stockout loss + expedite cost + recovery cost + penalties
+    </div>
+
+    <h3>Results (before vs. after wrapping)</h3>
+
+    <div class="kv-table-wrap">
+      <table class="kv-table" aria-label="before-after-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th class="num">Lean (Before)</th>
+            <th class="num">Wrapped (After)</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Expected annual disruption cost</td>
+            <td class="num">$1.8M</td>
+            <td class="num">$1.2M</td>
+            <td>Better preparedness reduces routine disruption drag</td>
+          </tr>
+          <tr>
+            <td>99% VaR</td>
+            <td class="num">$6.0M</td>
+            <td class="num">$4.0M</td>
+            <td>Lower “threshold” loss in severe states</td>
+          </tr>
+          <tr>
+            <td><strong>99% CVaR (Tail severity)</strong></td>
+            <td class="num"><strong>$18.0M</strong></td>
+            <td class="num"><strong>$8.0M</strong></td>
+            <td><strong>Tail chopped down; fewer catastrophic quarters</strong></td>
+          </tr>
+          <tr>
+            <td>Wrapper annual cost (“premium”)</td>
+            <td class="num">$0</td>
+            <td class="num">$2.0M</td>
+            <td>Budgetable spend replaces emergency spend</td>
+          </tr>
+          <tr>
+            <td>Tail reduction</td>
+            <td class="num">—</td>
+            <td class="num"><strong>-56%</strong></td>
+            <td>Primary COO/CFO selling point</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="kv-footnote">
+      Note: Numbers are illustrative but realistic for a single critical-node dependency. The point is the
+      shape of the distribution: fat tails make CVaR the decision-driving metric.
+    </p>
+
+    <div class="kv-quote">
+      <p>
+        <strong>The point isn’t “risk reduction” in the abstract.</strong> The point is reducing the
+        <strong>severity</strong> of disaster-mode outcomes that dominate long-run cost and leadership attention.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>5) What “wrapping” looks like operationally</h2>
+    <p>
+      A DVaR wrapper is not “add inventory everywhere.” It is a targeted portfolio of operational options
+      that specifically reduce tail severity—especially where losses are most convex.
+    </p>
+
+    <div class="kv-callout">
+      <strong>Common wrapper levers</strong>
+      <ul>
+        <li><strong>Dual-sourcing options:</strong> prequalified suppliers with standby agreements</li>
+        <li><strong>Targeted strategic inventory:</strong> placed where stockouts become nonlinear</li>
+        <li><strong>Freight capacity optionality:</strong> pre-negotiated surge terms (avoid spot panic pricing)</li>
+        <li><strong>Postponement/late configuration:</strong> keep product generic longer, customize later</li>
+        <li><strong>Operational circuit breakers:</strong> clear triggers that activate contingency playbooks early</li>
+      </ul>
+    </div>
+
+    <p>
+      The CFO framing is straightforward: these actions function like an annual premium that reduces both
+      expected disruption drag and tail-loss exposure. The COO framing is equally direct: fewer stoppages,
+      fewer escalations, fewer compromises, and faster recovery.
+    </p>
+  </section>
+
+  <section>
+    <h2>6) A practical implementation roadmap (analytics + governance)</h2>
+    <p>
+      This can be implemented without building a research lab. The workflow is:
+    </p>
+
+    <ol style="margin-left: 20px; line-height: 1.55;">
+      <li><strong>Define the loss function</strong> (stockouts, expediting, penalties, recovery, churn proxies).</li>
+      <li><strong>Model uncertainty dynamically</strong> (stochastic volatility for lead time, demand, supply reliability).</li>
+      <li><strong>Simulate scenarios</strong> (10k+ Monte Carlo paths; include jump events and stress correlations).</li>
+      <li><strong>Compute VaR and CVaR</strong> (e.g., 95% and 99%; emphasize 99% CVaR for tail severity).</li>
+      <li><strong>Design wrapper levers</strong> (options portfolio: sourcing, inventory, capacity, postponement).</li>
+      <li><strong>Optimize</strong> using <code>E[C] + λ·CVaR(C)</code> to reflect risk appetite transparently.</li>
+      <li><strong>Run quarterly tail reviews</strong> (what dominates CVaR; what’s the cheapest tail reducer?).</li>
+    </ol>
+
+    <div class="kv-callout">
+      <strong>Governance note</strong>
+      <p>
+        A quarterly “tail review” turns risk from a vague fear into a managed portfolio. Over time, leadership
+        learns which actions reduce CVaR most cheaply, and the supply chain becomes structurally less fragile.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>7) Conclusion: DVaR wrapping is operational alpha</h2>
+    <p>
+      Supply chains are increasingly dominated by regime shifts and fat tails. Stochastic volatility captures
+      the dynamics of uncertainty. DVaR/CVaR wrapping prices the severity of disaster-mode outcomes and turns
+      that knowledge into operational design decisions.
+    </p>
+    <p>
+      The result is a CFO/COO win-win: lower total cost over time, fewer emergency actions, improved service
+      reliability, and fewer “surprise” quarters driven by tail events.
+    </p>
+
+    <div class="kv-quote">
+      <p>
+        <strong>Efficiency is easy to measure.</strong> Tail risk is what destroys companies.
+        DVaR wrapping prices the tail—and builds a supply chain that survives it.
+      </p>
+    </div>
+  </section>
+
+  <hr class="kv-hr" />
+
+  <footer class="kv-meta" style="margin-top: 18px;">
+    <p style="margin: 0;">
+      If you’d like to discuss applying this framework to your business, contact Koenig Ventures LLC.
+    </p>
+  </footer>
+</article>
+
     
   </div>
 
