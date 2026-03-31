@@ -94,13 +94,20 @@
       object-fit: contain;
       display: block;
     }
-    
+    .blog-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.blog-box h3 { margin-top: 0; }
   </style>
 </head>
 <body>
   <header>
     <div style='display:flex; align-items:center; gap:10px;'>
-      <img src="logo_2026.png" alt="Koenig Ventures LLC Logo">
+      <img src='logo_2026.png' alt='Koenig Ventures LLC Logo'>
 
       <div>
         <h2 style='margin:0;'>Koenig Ventures LLC</h2>
@@ -108,14 +115,13 @@
       </div>
     </div>
     <nav>
-      <a href='#mission'>Mission</a>
-      <a href='#markets'>Markets</a>
-      <a href='#thoughts'>Thoughts</a>
-      <a href='#about'>About</a>
-      <a href='#partnerships'>Partnerships</a>
-      <a href="#blog">Blog</a>
-      <a href='#contact'>Contact</a>
-    </nav>
+  <a href="#mission">Mission</a>
+  <a href="#markets">Markets</a>
+  <a href="#thoughts">Thoughts</a>
+  <a href="#about">About</a>
+  <a href="#blog">Blog</a>
+  <a href="#contact">Contact</a>
+</nav>
   </header>
 
   <section class='hero'>
@@ -156,13 +162,11 @@
   </section>
 
   <section id="blog">
-  <h3>Blog</h3>
-  <p>Market notes and research from Koenig Ventures.</p>
-  <p>
-   <a href="blog.html#dvar-wrapping-supply-chains" style="color:#1976d2; font-weight:600; text-decoration:none;">
-  Jump to the new article →
-</a>
-  </p>
+  <h2>Koenig Ventures Blog</h2>
+  <p><em>Market insights, research notes, and perspectives from Steven G. Koenig.</em></p>
+
+  <div class="blog-box">
+    <h3>
 </section>
 
 
