@@ -4,14 +4,18 @@ let current;
 function readInputs(){return Object.fromEntries(keys.map(k=>[k,(k==='vvix'&&$('missing').checked)||$(k).value.trim()===''?null:Number($(k).value)]));}
 function update(custom=false){
  $('vvix').disabled=$('missing').checked;
- const inputs=readInputs(),r=Garlic.evaluate(inputs);current={version:'Garlic demo 0.1',data_mode:'SYNTHETIC / USER-ENTERED',scenario:Garlic.scenarios[$('scenario').value].name,inputs,results:r,assumed_transition_matrix:Garlic.matrix,states:Garlic.states,model_steps:5,calendar_horizon:'Not calibrated',disclaimer:$('disclaimer-text').textContent};
+ const inputs=readInputs(),r=Garlic.evaluate(inputs);current={version:'Garlic demo 0.2',data_mode:'SYNTHETIC / USER-ENTERED',scenario:Garlic.scenarios[$('scenario').value].name,inputs,results:r,assumed_transition_matrix:Garlic.matrix,states:Garlic.states,model_steps:5,calendar_horizon:'Not calibrated',disclaimer:$('disclaimer-text').textContent};
  $('input-note').textContent=custom?'Custom inputs based on the selected scenario.':'Preset synthetic scenario. No live market data.';
  $('status').textContent=r.valid?'SYNTHETIC SCENARIO':'OUTPUT WITHHELD';$('status').className='badge'+(r.valid?'':' blocked');
  $('result-title').textContent=r.valid?r.signal.toLowerCase().replace(/^./,s=>s.toUpperCase()):'Required inputs unavailable';
- $('summary').textContent=r.valid?`${r.trend.toLowerCase()} · ${r.direction.toLowerCase()} · ${r.risk.toLowerCase()} stress classification. Inspect the assumptions and score contributions below.`:`Missing or invalid: ${r.errors.join(', ')}. Supply valid values to resume. No regime, hedge score or probabilities are generated.`;
+ $('summary').textContent=r.valid?`${r.trend.toLowerCase()} · ${r.direction.toLowerCase()} · ${r.risk.toLowerCase()} market-only stress classification. Geo overlay: ${r.geoRegime.toLowerCase()}. Inspect the assumptions and score contributions below.`:`Missing or invalid: ${r.errors.join(', ')}. Supply valid values to resume. No regime, hedge score or probabilities are generated.`;
  for(const id of ['state','stress','vrp','intensity'])$(id).textContent=r.valid?({state:r.state,stress:String(r.stress),vrp:r.vrp.toFixed(1)+' pp',intensity:r.intensity+' / 100'})[id]:'—';
  $('intensity-bar').style.width=(r.valid?r.intensity:0)+'%';
  $('review').textContent=!r.valid?'Human review: restore and verify the missing inputs before evaluating any hedge.':r.intensity>=75?'Research discussion: examine downside exposure, protection costs and liquidity under stress. A human must assess suitability, sizing and trade-offs.':r.intensity>=40?'Research discussion: examine whether existing protection remains aligned with the scenario and its assumptions. The model has no knowledge of your portfolio.':'Research discussion: compare the cost of protection with residual tail exposure. A low model score is not an assurance of safety.';
+ $('action').textContent=r.valid?r.action:'Insufficient data — no strategy generated.';
+ $('reason').textContent=r.valid?r.reason:'Restore required inputs before evaluating a strategy.';
+ $('strategy').textContent=r.valid?r.strategy:'Withheld.';
+ $('geo-context').textContent=r.valid?`Market classification excludes geopolitical stress. Manual geo score ${inputs.geo}/20: ${r.geoRegime.toLowerCase()}, adding ${r.geoAdd} points. Final strategy uses ${r.intensity}/100 after all adjustments; this is not hedge coverage or capital allocation.`:'No market or geopolitical strategy is produced from incomplete data.';
  $('trace').replaceChildren();
  if(r.valid)for(const [label,value] of [['Base rules',r.base],['After transition adjustment',r.afterTransition],['After risk-surface adjustment',r.surface],['Geo adjustment','+'+r.geoAdd],['Final, capped at 100',r.intensity]]){const li=document.createElement('li'),b=document.createElement('b');li.append(label);b.textContent=value;li.append(b);$('trace').append(li);}
  $('probabilities').replaceChildren();
