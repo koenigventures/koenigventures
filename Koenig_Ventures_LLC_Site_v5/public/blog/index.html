@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koenig Ventures LLC</title>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background-color: #ffffff; scroll-behavior: smooth; }
+    header { background: linear-gradient(to right, #0d47a1, #1976d2); color: white; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+    header img { height: 55px; }
+    nav a { color: white; margin-left: 1.5rem; text-decoration: none; font-weight: 500; }
+    .hero { background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat; height: 90vh; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: white; }
+    .hero h2 { font-size: 2.5rem; max-width: 800px; text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5); }
+    .hero p { font-size: 1.2rem; margin-top: 1rem; }
+    section { padding: 4rem 3rem; max-width: 1100px; margin: auto; }
+    h3 { color: #0d47a1; border-bottom: 2px solid #1976d2; display: inline-block; padding-bottom: 0.3rem; margin-bottom: 2rem; }
+    .markets { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+    .thoughts-box { border: 1px solid #e0e0e0; border-radius: 10px; padding: 2rem; background: #f8f9fa; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .thoughts-box input, .thoughts-box textarea { width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+    .thoughts-box button { background: #1976d2; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: background 0.3s ease; }
+    .thoughts-box button:hover { background: #0d47a1; }
+    .blog-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.blog-box h3 { margin-top: 0; }
+    footer { text-align: center; padding: 2rem; background: #f5f5f5; font-size: 0.9rem; color: #555; }
+    footer a { color: #1976d2; text-decoration: none; margin: 0 0.5rem; }
+    /* Minimal, self-contained styling. Safe to remove if your site has global typography. */
+    .kv-article { max-width: 920px; margin: 0 auto; padding: 12px 16px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #0f172a; }
+    .kv-article h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 6px; }
+    .kv-article .kv-meta { font-size: 0.95rem; color: #ffffff; margin-bottom: 18px; }
+    .kv-article h2 { font-size: 1.35rem; margin: 28px 0 10px; }
+    .kv-article h3 { font-size: 1.1rem; margin: 18px 0 8px; }
+    .kv-article p { line-height: 1.55; margin: 10px 0; }
+    .kv-article ul { margin: 10px 0 10px 20px; line-height: 1.55; }
+    .kv-article li { margin: 6px 0; }
+    .kv-hr { border: 0; border-top: 1px solid #e2e8f0; margin: 18px 0; }
+
+    .kv-callout {
+      border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 12px;
+      padding: 14px 14px; margin: 16px 0;
+    }
+    .kv-callout strong { display: inline-block; margin-bottom: 6px; }
+    .kv-quote {
+      border-left: 4px solid #2563eb; padding: 10px 14px; margin: 14px 0;
+      background: #eff6ff; border-radius: 10px;
+    }
+
+    .kv-kpi {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0;
+    }
+    .kv-kpi .kv-kpi__box {
+      border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; background: #ffffff;
+    }
+    .kv-kpi .kv-kpi__label { font-size: 0.85rem; color: #64748b; margin-bottom: 6px; }
+    .kv-kpi .kv-kpi__value { font-size: 1.2rem; font-weight: 700; }
+    .kv-kpi .kv-kpi__note { font-size: 0.85rem; color: #475569; margin-top: 4px; }
+
+    .kv-table-wrap { overflow-x: auto; margin: 12px 0; }
+    table.kv-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    table.kv-table th, table.kv-table td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+    table.kv-table th { background: #f1f5f9; font-weight: 700; }
+    table.kv-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .kv-footnote { font-size: 0.9rem; color: #475569; margin-top: 10px; }
+
+    .kv-bullets-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .kv-bullets-2col .kv-callout { margin: 0; }
+    @media (max-width: 760px) {
+      .kv-kpi { grid-template-columns: 1fr; }
+      .kv-bullets-2col { grid-template-columns: 1fr; }
+    }
+
+    .kv-math {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: #0b1220; color: #e2e8f0; border-radius: 12px; padding: 12px; overflow-x: auto;
+      margin: 12px 0;} 
+  </style>
+</head>
+<body>
+  <header>
+    <div style='display:flex; align-items:center; gap:10px;'>
+      <img src="logo_2026.png" alt="Koenig Ventures LLC Logo">
+      <div>
+        <h2 style='margin:0;'>Koenig Ventures LLC</h2>
+        <p style='margin:0; font-size:0.9rem; color:#e3f2fd;'>An Independent Investment Company</p>
+      </div>
+    </div>
+  <nav>
+  <a href="#mission">Mission</a>
+  <a href="#markets">Markets</a>
+  <a href="#thoughts">Thoughts</a>
+  <a href="#about">About</a>
+  <a href="#blog">Blog</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+  </header>
+
+  <section class='hero'>
+    <h2>Turning Vision into Value Across Biotech, Quantum, and Advanced Materials</h2>
+    <p>Strategic investing at the intersection of science, technology, and human potential.</p>
+  </section>
+
+  <section id='mission'>
+    <h3>Mission</h3>
+    <p>Koenig Ventures LLC is dedicated to discovering and scaling transformative technologies that redefine industries and improve lives. Our mission is to connect capital with creativity—bridging innovation in biotech, quantum computing, and advanced materials with practical execution and long-term value creation.</p>
+  </section>
+
+  <section id='markets'>
+    <h3>Market Focus</h3>
+    <div class='markets'>
+      <div class='card'><h4>Biotech & Health-Tech</h4><p>Investing in companies developing novel therapies, biologics, and AI-driven drug discovery platforms that address critical unmet needs.</p></div>
+      <div class='card'><h4>Advanced Materials</h4><p>Scaling innovations in composites, energy storage, and sustainable infrastructure—building the physical backbone of tomorrow’s economy.</p></div>
+      <div class='card'><h4>AI & Quantum Infrastructure</h4><p>Bridging computation and cognition through AI-native and quantum-ready architectures designed to enhance valuation, modeling, and decision systems.</p></div>
+      <div class='card'><h4>Special Situations</h4><p>Targeting asymmetric opportunities in restructuring, spinouts, and cross-market arbitrage where insight and timing matter most.</p></div>
+    </div>
+  </section>
+
+ <section id="thoughts">
+  <h3>Thoughts</h3>
+  <div class="thoughts-box">
+    <p>Share a thought or question with Koenig Ventures — we value your ideas and dialogue.</p>
+
+    <form name="thoughts" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="thoughts">
+
+      <input type="text" name="name" placeholder="Your name (optional)" />
+      <textarea name="message" rows="4" placeholder="Write your thought or question here..."></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+  </div>
+</section>
+
+  <section id='about'>
+    <h3>About</h3>
+    <p>Founded by <strong>Steven G. Koenig</strong>, a 35-year veteran of global derivatives trading and venture capital, Koenig Ventures LLC bridges finance, science, and technology to identify asymmetric growth opportunities worldwide.</p>
+  </section>
+
+  <!-- ✳️ BEGIN BLOG SECTION ✳️ -->
+<section id="blog">
+  <h2>Koenig Ventures Blog</h2>
+  <p><em>Market insights, research notes, and perspectives from Steven G. Koenig.</em></p>
+
+  <div class="blog-box">
+    <h3>Recent Posts</h3>
+    <ul>
+      <li>
+        <strong>Mar 29, 2026 — The Koenig Ventures LLC Valuation Model</strong><br>
+        <a href="valuation-model.html">Read More</a>
+      </li>
+      <li>
+        <strong>Mar 2026 — DVaR Wrapping in Supply Chains</strong><br>
+        <a href="dvar-wrapping-supply-chains.html">Read More</a>
+      </li>
+      <li>
+        <strong>Nov 5, 2025 — Market Volatility and Asymmetric Risk</strong><br>
+        <a href="2025-11-05-market-volatility.html">Read More</a>
+      </li>
+    </ul>
+  </div>
+
+  <p style="margin-top: 1.5rem;">
+    <a href="../index.html" style="color:#1976d2; font-weight:600; text-decoration:none;">
+      ← Back to Home
+    </a>
+  </p>
+</section>
+
+<!-- ✳️ END BLOG SECTION ✳️ -->
+  
+  <section id='contact' class='contact'>
+    <h3>Contact</h3>
+    <p>Interested in connecting or sharing an idea? Reach out to us:</p>
+    <p>📧 <a href='mailto:info@koenigventures.net'>info@koenigventures.net</a><br />🌐 <a href='https://www.linkedin.com/'>LinkedIn</a></p>
+  </section>
+
+  <footer>
+    © 2025 Koenig Ventures LLC — Registered in Kansas, USA | v5 | 
+    <a href='mailto:info@koenigventures.net'>info@koenigventures.net</a>
+  </footer>
+</body>
+</html>

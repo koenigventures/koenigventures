@@ -1,0 +1,14 @@
+{
+  "name": "koenig-nexus",
+  "version": "0.4.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.4"
+  },
+  "scripts": {
+    "test": "node verification/check-data.mjs"
+  }
+}
