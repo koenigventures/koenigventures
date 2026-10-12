@@ -1,5 +1,9 @@
 [build]
-  publish = "."
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
@@ -7,3 +11,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/nexus-input/*"
+  [headers.values]
+    Cache-Control = "no-store"
