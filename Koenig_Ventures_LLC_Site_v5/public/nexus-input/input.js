@@ -19,7 +19,7 @@ el('export-db').addEventListener('click',e=>task(e.target,'import-status',async(
 el('export-run').addEventListener('click',()=>{if(lastRun)download(lastRun,'nexus-current-model-run.json');else message('run-status','Run the models first.');});
 el('reload').addEventListener('click',e=>task(e.target,'import-status',reload));
 el('open-analysis').addEventListener('click',()=>{if(!lastRun){message('run-status','Run the models first.');return;}sessionStorage.setItem('nexus-current-run',JSON.stringify(lastRun));sessionStorage.setItem('nexus-history-rows',JSON.stringify(database.closes.filter(r=>r.prices?.SPX>0).map(r=>({date:r.date,vix:r.vix,vvix:r.vvix,spx:r.prices.SPX}))));location.href='../garlic-demo/index.html';});
-const reported=new Date('2026-10-12T16:16:07Z');el('observed-at').value=new Date(reported-reported.getTimezoneOffset()*60000).toISOString().slice(0,16);el('time-zone').textContent='Device time zone: '+Intl.DateTimeFormat().resolvedOptions().timeZone;
-el('close-date').value=new Date().toISOString().slice(0,10);
+el('observed-at').value='';el('time-zone').textContent='Device time zone: '+Intl.DateTimeFormat().resolvedOptions().timeZone;
+el('close-date').value=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 
 for(const id of ['current-vix','current-vvix','observed-at','current-geo'])el(id).addEventListener('input',()=>{lastRun=null;el('results').replaceChildren();message('run-status','Inputs changed. Run the models again.');});
