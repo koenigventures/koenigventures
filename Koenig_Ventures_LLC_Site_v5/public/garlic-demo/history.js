@@ -11,7 +11,7 @@ function features(rows,i){
  if(i<20)throw Error('Need 21 closes');
  const returns=rows.slice(i-20,i+1).slice(1).map((r,j)=>Math.log(r.spx/rows[i-20+j].spx));
  const mean=returns.reduce((a,b)=>a+b,0)/20;
- return {vix:rows[i].vix,vvix:rows[i].vvix,rv:Math.sqrt(returns.reduce((a,b)=>a+(b-mean)**2,0)/19)*Math.sqrt(252)*100,r5:(rows[i].spx/rows[i-5].spx-1)*100,r10:(rows[i].spx/rows[i-10].spx-1)*100,geo:0};
+ return {vix:rows[i].vix,vvix:rows[i].vvix,rv:Math.sqrt(returns.reduce((a,b)=>a+(b-mean)**2,0)/20)*Math.sqrt(252)*100,r5:(rows[i].spx/rows[i-5].spx-1)*100,r10:(rows[i].spx/rows[i-10].spx-1)*100,geo:0};
 }
 function context(rows,x,asOf){
  if(!root.Garlic.evaluate(x).valid)throw Error('Current model inputs are incomplete');

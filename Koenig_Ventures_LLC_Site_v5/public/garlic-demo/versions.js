@@ -25,7 +25,34 @@ function evaluate71(x){
  return {valid:true,version:'V7.1 overlay',signal,stress,risk,vol,score,
   explanation:`${comment} Stress ${stress}/3: VIX >25, VVIX >110, and negative five-session return each add one. Source position overlay requires a verified holding; none is used here.`};
 }
-const api={evaluate70,evaluate71};
+
+// V7.4 uses the supplied blended regime and transition adjustment, without
+// V7.6's risk-surface intensity adjustment or geopolitical addition.
+function evaluate74(x){
+ const gate=root.Garlic.evaluate(x);
+ if(!gate.valid)return {valid:false,errors:gate.errors};
+ const intensity=gate.afterTransition;
+ return {valid:true,version:'V7.4 integrated risk engine',signal:gate.signal,
+  stress:gate.stress,risk:gate.risk,state:gate.state,trend:gate.trend,
+  direction:gate.direction,volState:gate.volState,vrp:gate.vrp,
+  baseIntensity:gate.base,intensity,stochasticAdjustment:intensity-gate.base,
+  oneStep:root.Garlic.probabilities(gate.state,1),
+  threeStep:root.Garlic.probabilities(gate.state,3),
+  fiveStep:root.Garlic.probabilities(gate.state,5),
+  explanation:'Supplied V7.4 rules; exact transition-matrix propagation replaces random simulation. Probabilities are conditional on an assumed matrix, not calibrated forecasts. Score is an index, not a portfolio hedge percentage. No verified position is assumed.'};
+}
+function evaluate74Surface(x){
+ const engine=evaluate74(x);if(!engine.valid)return engine;
+ const crisis=engine.fiveStep[3],stressComponent=engine.stress*2;
+ const vrpComponent=engine.vrp>=10?6:engine.vrp>=7?4:engine.vrp>=4?2:engine.vrp>=2?1:0;
+ const tailComponent=crisis>=.25?8:crisis>=.20?6:crisis>=.15?4:crisis>=.10?2:0;
+ const surfaceScore=stressComponent+vrpComponent+tailComponent;
+ const surfaceLevel=surfaceScore<=8?'LOW RISK':surfaceScore<=14?'MODERATE RISK':surfaceScore<=20?'HIGH RISK':'EXTREME RISK';
+ return {...engine,version:'V7.4 risk surface',surfaceScore,surfaceLevel,
+  surfaceComponents:{stress:stressComponent,vrp:vrpComponent,tail:tailComponent},
+  explanation:engine.explanation+' Risk-surface score uses its own 0–34 scale and does not change V7.4 hedge intensity.'};
+}
+const api={evaluate70,evaluate71,evaluate74,evaluate74Surface};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;
 root.GarlicVersions=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
