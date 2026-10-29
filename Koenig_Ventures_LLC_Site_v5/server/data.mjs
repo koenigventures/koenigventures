@@ -40,10 +40,74 @@ export function saveSnapshot(state,input,now=new Date()){
  const row={id:randomUUID(),vix:input.vix,vvix:input.vvix,observedAt:new Date(t).toISOString(),source:String(input.source||'Manual entry by Steven').slice(0,200),savedAt:now.toISOString(),kind:'current-reading'};
  if(state.snapshots.length>=10000)fail('Snapshot limit reached. Export and contact your administrator.');state.snapshots.push(row);return row;
 }
-export function importHistory(state,rows,now=new Date()){
- if(!Array.isArray(rows)||!rows.length||rows.length>5000||state.closes.length+rows.length>10000)fail('Import must contain 1–5,000 rows and keep the database below 10,000 dates.');
- const dates=new Set();for(const r of rows){validateVol(r);if(!validDate(r.date)||r.date>=now.toISOString().slice(0,10)||dates.has(r.date)||(r.spx!=null&&(typeof r.spx!=='number'||!Number.isFinite(r.spx)||r.spx<=0)))fail('Invalid, future, or duplicate historical row.');dates.add(r.date);if(state.closes.some(x=>x.date===r.date))fail('Import overlaps existing dates; no records were changed.',409);}
- for(const r of rows)state.closes.push({date:r.date,vix:r.vix,vvix:r.vvix,source:'Garlic Data.xlsx import',prices:r.spx==null?{}:{SPX:r.spx},revision:1,updatedAt:now.toISOString()});
- state.closes.sort((a,b)=>a.date.localeCompare(b.date));state.audit.push({at:now.toISOString(),action:'import-history',count:rows.length});return {imported:rows.length};
+export function importHistory(state, rows, now = new Date()) {
+  if (
+    !Array.isArray(rows) ||
+    !rows.length ||
+    rows.length > 5000 ||
+    state.closes.length + rows.length > 10000
+  ) {
+    fail('Import must contain 1–5,000 rows and keep the database below 10,000 dates.');
+  }
+
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(now);
+
+  const hour = Number(new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    hourCycle: 'h23'
+  }).format(now));
+
+  const dates = new Set();
+
+  for (const r of rows) {
+    validateVol(r);
+
+    if (
+      !validDate(r.date) ||
+      r.date > today ||
+      (r.date === today && hour < 17) ||
+      dates.has(r.date) ||
+      (r.spx != null && (
+        typeof r.spx !== 'number' ||
+        !Number.isFinite(r.spx) ||
+        r.spx <= 0
+      ))
+    ) {
+      fail('Invalid, future, duplicate, or not-yet-closed historical row.');
+    }
+
+    dates.add(r.date);
+
+    if (state.closes.some(x => x.date === r.date)) {
+      fail('Import overlaps existing dates; no records were changed.', 409);
+    }
+  }
+
+  for (const r of rows) {
+    state.closes.push({
+      date: r.date,
+      vix: r.vix,
+      vvix: r.vvix,
+      source: 'Garlic Data.xlsx import',
+      prices: r.spx == null ? {} : {SPX: r.spx},
+      revision: 1,
+      updatedAt: now.toISOString()
+    });
+  }
+
+  state.closes.sort((a, b) => a.date.localeCompare(b.date));
+  state.audit.push({
+    at: now.toISOString(),
+    action: 'import-history',
+    count: rows.length
+  });
+
+  return {imported: rows.length};
 }
 export function historyRows(state,symbol='SPX'){return state.closes.filter(r=>r.prices?.[symbol]>0).map(r=>({date:r.date,vix:r.vix,vvix:r.vvix,spx:r.prices[symbol]}));}
